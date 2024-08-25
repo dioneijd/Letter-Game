@@ -1,10 +1,14 @@
 
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
+import { CountdownContext } from "../contexts/CountdownContext"
 
 
 
 export default function LetterButton({letter, clicksMax}) {
 
+  const { resetCountdown } = useContext(CountdownContext)
+  
+  
   let [clickedTimes, setClickedTimes] = useState(0)
   let [isClickable, setIsClickable] = useState(true)
 
@@ -22,13 +26,14 @@ export default function LetterButton({letter, clicksMax}) {
     console.log(isClickable)
     if (clickedTimes < clicksMax) {
       setClickedTimes(clickedTimes + 1)
+      resetCountdown()
     }
   }
     
   return (
 
     <div
-      className="h-20 w-20 border border-gray-400 rounded shadow "
+      className="h-120 w-20 border border-gray-400 rounded shadow "
     >
       {
         isClickable 

@@ -1,21 +1,12 @@
-import { useState, useEffect, useContext } from 'react'
-import { CountdownContext } from '../contexts/CountdownContext'
+import { useContext } from "react"
+import { CountdownContext } from "../contexts/CountdownContext"
 
-
-const defaultTimeInSeconds = 10
 
 export default function CountdownTimer() {
-  
-  const {
-    seconds,
-    hasFinished,
-    isActive,
-    startCountdown,
-    resetCountdown
-  } = useContext(CountdownContext)
 
-  console.log(startCountdown)
-  console.log(seconds)
+  const { isActive, seconds, startCountdown } = useContext(CountdownContext)
+  
+  
   
   return (
     <div className="flex items-center justify-center h-full">
