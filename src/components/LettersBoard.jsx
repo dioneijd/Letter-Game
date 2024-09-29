@@ -43,7 +43,7 @@ export default function LettersBoard() {
       <div className="bg-gray-200 flex flex-wrap justify-center gap-4 p-4 ">
         {alpha.map((letter) => {
           return (
-            <LetterButton letter={letter} key={letter} clicksMax={clickMax} />
+            <LetterButton key={letter} letter={letter} clicksMax={clickMax} />
           );
         })}
       </div>

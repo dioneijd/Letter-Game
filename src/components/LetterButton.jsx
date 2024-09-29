@@ -4,6 +4,8 @@ import { useCountdownContext } from "../contexts/CountdownContext";
 export default function LetterButton({ letter, clicksMax }) {
   const { resetCountdown } = useCountdownContext();
 
+  const letterButtonId = `btn-${letter}`;
+
   let [clickedTimes, setClickedTimes] = useState(0);
   let [isClickable, setIsClickable] = useState(true);
 
@@ -15,13 +17,27 @@ export default function LetterButton({ letter, clicksMax }) {
 
   function handleClick() {
     if (clickedTimes < clicksMax) {
+      makeCLickEffect();
       setClickedTimes(clickedTimes + 1);
       resetCountdown();
     }
   }
 
+  function makeCLickEffect() {
+    const button = document.getElementById(letterButtonId);
+
+    button.classList.add("animate-ping");
+
+    setTimeout(() => {
+      button.classList.remove("animate-ping");
+    }, 500);
+  }
+
   return (
-    <div className="h-24 w-24 border border-gray-400 rounded shadow ">
+    <div
+      id={letterButtonId}
+      className="h-24 w-24 border border-gray-400 rounded shadow "
+    >
       {isClickable && (
         <button
           onClick={handleClick}
