@@ -36,7 +36,7 @@ export default function LetterButton({ letter, clicksMax }) {
   return (
     <div
       id={letterButtonId}
-      className="h-24 w-24 border border-gray-400 rounded shadow "
+      className="h-32 w-32 border border-gray-400 rounded shadow "
     >
       {isClickable && (
         <button
