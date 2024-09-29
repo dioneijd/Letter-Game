@@ -1,58 +1,54 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState, useContext } from "react";
 
+const defaultTimeInSeconds = 15;
 
-const defaultTimeInSeconds = 10
+export const CountdownContext = createContext({});
 
+export function CountdownProviderCtx({ children }) {
+    const [time, setTime] = useState(defaultTimeInSeconds); // seconds
+    const [isActive, setIsActive] = useState(false);
+    const [hasFinished, setHasFinished] = useState(false);
 
+    const seconds = Math.floor(time % 60);
 
-export const CountdownContext = createContext({})
+    let countdownTimeout;
 
-export function CountdownProviderCtx({ children }){
-    const [time, setTime] = useState(defaultTimeInSeconds) // seconds
-    const [isActive, setIsActive] = useState(false)
-    const [hasFinished, setHasFinished] = useState(false)
-
-    const seconds = Math.floor(time % 60)
-
-    let countdownTimeout
-    
-    
-    function startCountdown(){
-        setTime(defaultTimeInSeconds)
-        
-        setIsActive(true)
+    function startCountdown() {
+        setTime(defaultTimeInSeconds);
+        setIsActive(true);
     }
-    
-    function resetCountdown(){
-        clearTimeout(countdownTimeout)
-        setTime(defaultTimeInSeconds)
+
+    function resetCountdown() {
+        clearTimeout(countdownTimeout);
+        setTime(defaultTimeInSeconds);
     }
 
     useEffect(() => {
-
-        if (isActive && time > 0){
+        if (isActive && time > 0) {
             countdownTimeout = setTimeout(() => {
-                setTime(time - 1)
-            }, 1000)
-        }
-        else if (isActive && time == 0) {
+                setTime(time - 1);
+            }, 1000);
+        } else if (isActive && time == 0) {
             //setHasFinished(true)
-            setIsActive(false)
+            setIsActive(false);
         }
+    }, [isActive, time]);
 
-    }, [ isActive, time ])
-    
-    
     return (
-        <CountdownContext.Provider value={{
-            isActive,
-            seconds,
-            
-            startCountdown,
-            resetCountdown
-            
-        }}>
+        <CountdownContext.Provider
+            value={{
+                isActive,
+                seconds,
+
+                startCountdown,
+                resetCountdown,
+            }}
+        >
             {children}
         </CountdownContext.Provider>
-    )    
+    );
+}
+
+export function useCountdownContext() {
+    return useContext(CountdownContext);
 }

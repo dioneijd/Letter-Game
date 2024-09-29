@@ -1,40 +1,18 @@
-import './App.css'
-import questions from './data/questions.json'
+import "./App.css";
 
-import { useEffect, useState } from 'react'
-import { CountdownProviderCtx } from './contexts/CountdownContext'
+import Initial from "./pages/Initial";
+import Game from "./pages/Game";
 
-import LettersBoard from './components/LettersBoard'
-import CountdownTimer from './components/CountdownTimer'
-
+import { useGameManagerContext } from "./contexts/GameManagerContext";
 
 export default function App() {
+  const { isPlaying } = useGameManagerContext();
 
-  const [questionId, setQuestionId] = useState(-1)
-
-  useEffect(() => {
-    //getrandowid from questions
-    setQuestionId(Math.floor(Math.random() * questions.length))
-  }, [])
-
-  
   return (
     <main>
-        
-      <CountdownProviderCtx>
+      {!isPlaying && <Initial />}
 
-        <CountdownTimer/>
-        
-        <h1 className="text-3xl font-bold w-screen text-center">
-          {
-            questions[questionId]
-          }
-        </h1>
-  
-        <LettersBoard/>
-      
-      </CountdownProviderCtx>
-      
+      {isPlaying && <Game />}
     </main>
-  )
+  );
 }
