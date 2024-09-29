@@ -1,6 +1,5 @@
 import LetterButton from "./LetterButton";
 
-import { useGameManagerContext } from "../contexts/GameManagerContext";
 import { useGameSettingsContext } from "../contexts/GameSettingsContext";
 
 const alpha = [
@@ -33,14 +32,11 @@ const alpha = [
 ];
 
 export default function LettersBoard() {
-  const { question } = useGameManagerContext();
   const { maxLetterUsage: clickMax } = useGameSettingsContext();
 
   return (
     <>
-      <h1 className="text-3xl font-bold w-screen text-center">{question}</h1>
-
-      <div className="bg-gray-200 flex flex-wrap justify-center gap-4 p-4 ">
+      <div className="bg-gray-200 flex flex-wrap justify-center gap-4 p-4">
         {alpha.map((letter) => {
           return (
             <LetterButton key={letter} letter={letter} clicksMax={clickMax} />

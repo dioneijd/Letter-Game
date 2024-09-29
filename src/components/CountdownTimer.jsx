@@ -4,7 +4,7 @@ export default function CountdownTimer() {
   const { isActive, seconds } = useCountdownContext();
 
   return (
-    <div className="flex items-center justify-center h-full">
+    <div className="flex items-center justify-center h-full min-w-[400px]">
       {isActive && seconds > 5 && (
         <div className="text-4xl font-bold">{seconds} segundos</div>
       )}
