@@ -25,6 +25,7 @@ const alpha = [
   "S",
   "T",
   "U",
+  "V",
   "W",
   "X",
   "Y",
