@@ -8,11 +8,9 @@ import GameoverModal from "../components/GameoverModal"
 export const GameManagerContext = createContext({});
 
 export function GameManagerProviderCtx({ children }) {
-    const [question, setQuestion] = useState("");
-
-    const [isPlaying, setIsplaying] = useState(false);
-    
-    const [isGameoverModalOpen, setIsGameoverModalOpen] = useState(true)
+    const [question, setQuestion] = useState("")
+    const [isPlaying, setIsplaying] = useState(false)    
+    const [isGameoverModalOpen, setIsGameoverModalOpen] = useState(false)
 
     useEffect(() => {
         refreshQuestion()
@@ -49,6 +47,7 @@ export function GameManagerProviderCtx({ children }) {
                 closeGameoverModal
             }}
         >
+            
             { children }            
             { isGameoverModalOpen && <GameoverModal /> }
 
