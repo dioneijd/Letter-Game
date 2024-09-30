@@ -29,7 +29,7 @@ export function CountdownProviderCtx({ children }) {
                 setTime(time - 1);
             }, 1000);
         } else if (isActive && time == 0) {
-            //setHasFinished(true)
+            setHasFinished(true)
             setIsActive(false);
         }
     }, [isActive, time]);
@@ -39,6 +39,8 @@ export function CountdownProviderCtx({ children }) {
             value={{
                 isActive,
                 seconds,
+
+                hasFinished,
 
                 startCountdown,
                 resetCountdown,
